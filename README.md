@@ -23,8 +23,8 @@ This library comes with a few predefined Animation classes, but was primarily bu
 
 ```js
 class MyAnimation extends Animation {       // Animation classes must extend from the Animation base                    
-    constructor(node, ...) {                // class or a derived class
-        super(node)                         // must call super with the node that is being animated, this 
+    constructor(node, ...) {                // class or a child class of Animation
+        super(node)                         // Must call super with the node that is being animated. This 
                                             // node may be purely symbolic, but the Animator object requires 
                                             // a node with a valid id to attach to the running animation
         // perform whatever
