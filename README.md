@@ -19,6 +19,12 @@ Animator.queue(new Fade(node, 0, -0.1), 300) // queues a Fade animation to run a
 
 Besides the delay parameter in the `Animator.queue(anim, delay)` method, all animations are removed from any explicit time intervals. Instead, an animation's repeat sequence is called recursively through the `window.requestAnimationFrame(func)` method. For more information about this method see [here](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame).
 
+Importantly, animations are organized by the Animator object in the following ways:
+* All animations are tagged by the id of the node that is being animated (passed to super constructor; see below) and the name of the animation.
+* All running animations are logged in the `animations` global dictionary with the key `id,animName` and value `animation request id` (returned by requestAnimationFrame()). To see a list of currently running animations, simply log this dictionary (e.g. `console.log(animations)`).
+* If an animation is queued that is already currently running (according to the id+animation-name combo) the currently running animation is canceled and the queued animation takes its place. In this way, animations never enter infinite loops and users are not forced to wait until the end of an animation (in the case that one is triggered by user input).
+* Multiple *different* animations, however, **can** be run on the same element.
+
 This library comes with a few predefined Animation classes, but was primarily built for custom animations. To create your own animation, declare a class with the following structure:
 
 ```js
@@ -99,6 +105,10 @@ class Fade extends Animation {                                                  
     } // stepFade
 } // Fade
 ```
+
+For more inspiration and understanding of the Animation class structure, see more animation examples in [animations.js](animations.js).
+
+While not extremely robust or comprehensive, this library emphasizes versatility. Animations may be as complex or simple as you like.
 
 ## Authors
 
