@@ -27,7 +27,7 @@ Importantly, animations are organized by the Animator object in the following wa
 * All animations are tagged by the id of the node that is being animated (passed to super constructor; see below) and the name of the animation.
 * All running animations are logged in the `animations` global dictionary with the key `id,animName` and value `animation request id` (returned by requestAnimationFrame()). To see a list of currently running animations, simply log this dictionary (e.g. `console.log(animations)`).
 * If an animation is queued that is already currently running (according to the id+animation-name combo) the currently running animation is canceled and the queued animation takes its place. In this way, animations never enter infinite loops and users are not forced to wait until the end of an animation (in the case that one is triggered by user input).
-* Multiple *different* animations, however, **can** be run on the same element.
+* Multiple *different* animations, however, *can* be run on the same element.
 * Animations may be canceled at any time using the `Animator.cancel(ids, animation)` or `Animator.cancelAll(id)` methods. For documentation of these methods, see the source code.
 * To check for currently running animations for an element, the `Animator.check(id)` method may be used.
 
