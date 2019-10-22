@@ -10,7 +10,7 @@ To use this library, simply download the [animations.js](animations.js) file fro
 
 ### Running an animation
 
-This library relies solely on JavaScript for its animations, and functions by routing all animations through a global `Animator` object. Each animation is also represented as a JavaScript class.
+This library relies solely on JavaScript for its animations, and operates by routing all animations through a global `Animator` object. Each animation is also represented as a JavaScript class.
 
 To run an animation simply queue an Animation object with the `Animator.queue(anim, delay)` method:
 
