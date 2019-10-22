@@ -51,7 +51,7 @@ class Fade extends Animation {                                                  
      * @param node the node which to animate, must have an id
      * @param fadeTo the opacity value to which to fade
      * @param step the increment of opacity value for each animation frame,
-     * controls the speed of the animation (e.g. 0.1), can be negativeo or positive
+     * controls the speed of the animation (e.g. 0.1), can be negative or positive
      */
     constructor(node, fadeTo, step) {
         super(node)
