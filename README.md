@@ -12,7 +12,7 @@ This library relies solely on JavaScript for its animations, and functions by ro
 
 To run an animation simply queue an Animation object with the `Animator.queue(anim, delay)` method:
 
-```
+```js
 Animator.queue(new Fade(node, 1, 0.1))       // queues a Fade animation to run immediately
 Animator.queue(new Fade(node, 0, -0.1), 300) // queues a Fade animation to run after 300ms
 ```
@@ -21,24 +21,27 @@ Besides the delay parameter in the `Animator.queue(anim, delay)` method, all ani
 
 This library comes with a few predefined Animation classes, but was primarily built for custom animations. To create your own animation, declare a class with the following structure:
 
-```
-class MyAnimation extends Animation {       // Animation classes must extend from the Animation base class or a derived class
-    constructor(node, ...) {
-        super(node)                         // must call super with the node that is being animated, this node may be purely symbolic, but the Animator object requires a node with a valid id to attach to the running animation
-        // perform whatever necessary initializations
+```js
+class MyAnimation extends Animation {       // Animation classes must extend from the Animation base                    
+    constructor(node, ...) {                // class or a derived class
+        super(node)                         // must call super with the node that is being animated, this 
+                                            // node may be purely symbolic, but the Animator object requires 
+                                            // a node with a valid id to attach to the running animation
+        // perform whatever
+        // necessary initializations
     }
     
-    anim() {                                // Animation classes must implement an anim() method, which will be repeatedly called by window.requestAnimationFrame(func)
-        // perform one animation step       // The anim() method should return false (or falsy value) if it should be called again
-    }                                       // If the animation is complete, return true from the anim() method
-    
-    ... // define any other methods necessary
+    anim() {                                // Animation classes must implement an anim() method, which will
+        // perform one animation step       // be repeatedly called by window.requestAnimationFrame(func)
+    }                                       // The anim() method should return false if it should be called again
+                                            // If the animation is complete, return true from the anim() method
+    ... // define any other methods
 }
 ```
 
 To get an idea of what this construction may look like, take a look at the Fade animation below:
 
-```
+```js
 /**
  * A fade animation.
  */
