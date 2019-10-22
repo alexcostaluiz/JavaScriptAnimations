@@ -1,6 +1,6 @@
 # JavaScriptAnimations
 
-Lightweight and versatile JavaScript animations library.
+Lightweight and versatile JavaScript animations library. View an example of this library in use here: [alexcostaluiz.com](http://alexcostaluiz.com).
 
 ## Getting Started
 
