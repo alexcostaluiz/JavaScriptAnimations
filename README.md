@@ -22,14 +22,18 @@ Animator.queue(new Fade(node, 1, 0.1))       // queues a Fade animation to run i
 Animator.queue(new Fade(node, 0, -0.1), 300) // queues a Fade animation to run after 300ms
 ```
 
-Besides the delay parameter in the `Animator.queue(anim, delay)` method, all animations are removed from any explicit time intervals. Instead, an animation's repeat sequence is called recursively through the `window.requestAnimationFrame(func)` method. For more information about this method see [here](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame).
+Besides the delay parameter in the `Animator.queue(anim, delay)` method, all animations are removed from any explicit time intervals. Instead, an animation's repeat sequence is called recursively through the `requestAnimationFrame()` function.  
+
+Animation timing is therefore controlled through the step size of an animation. For example, a Fade animation with a step size of `0.1` will run twice as fast as one with a step size of `0.05`. The reason for this is that conventional animation schemes using explicit time intervals with `setTimeout()` or `setInterval()` are simply unreliable. They cannot provide any guarantee of executing at the specified timing because of their reliance on the user's shifting system resources. Moreover, `requestAnimationFrame()` is optimized to sync with the user's system resources and will pause or slow down when the animating window is not in focus. These optimizations allow for much smoother animations.  
+
+For more information about this function, see [here](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) for documentation or [here](http://www.javascriptkit.com/javatutors/requestanimationframe.shtml) for a better explanation of `requestAnimationFrame()`'s merits than is provided here.
 
 ### The Animator object
 
 Importantly, animations are organized by the Animator object in the following ways:
 * All animations are tagged by the id of the node that is being animated (passed to super constructor; see below) and the name of the animation.
 * All running animations are logged in the `animations` global dictionary with the key `id,animName` and value `animation request id` (returned by requestAnimationFrame()). To see a list of currently running animations, simply log this dictionary (e.g. `console.log(animations)`).
-* If an animation is queued that is already currently running (according to the id+animation-name combo) the currently running animation is canceled and the queued animation takes its place. In this way, animations never enter infinite loops and users are not forced to wait until the end of an animation (in the case that one is triggered by user input).
+* ***NOTE:*** If an animation is queued that is already currently running (according to the id+animation-name combo) the currently running animation is canceled and the queued animation takes its place. In this way, animations never enter infinite loops and users are not forced to wait until the end of an animation (in the case that one is triggered by user input).
 * Multiple *different* animations, however, *can* be run on the same element.
 * Animations may be canceled at any time using the `Animator.cancel(ids, animation)` or `Animator.cancelAll(id)` methods. For documentation of these methods, see the source code.
 * To check for currently running animations for an element, the `Animator.check(id)` method may be used.
